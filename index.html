@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Art Quiz</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #3498db; /* Blue background color */
+            color: #ecf0f1; /* Light grey text color */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 28px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 36px;
+            color: #e74c3c; /* Red color for headers */
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const questionContainer = document.body;
+        const countdownElement = document.createElement("div");
+
+        const allArtQuestions = [
+       pergunta: "Qual é a principal variedade de uva utilizada na produção de Champagne?",
+    resposta: "Chardonnay, Pinot Noir e Pinot Meunier"
+  },
+  {
+    pergunta: "Qual região vinícola é conhecida por produzir Chianti?",
+    resposta: "Toscana, Itália"
+  },
+  {
+    pergunta: "Qual é o termo para girar o vinho num copo antes de degustar?",
+    resposta: "Aeração"
+  },
+  {
+    pergunta: "Na produção de vinho, a que se refere o termo 'terroir'?",
+    resposta: "Os fatores ambientais que influenciam as características do vinho"
+  },
+  {
+    pergunta: "Qual país é famoso por seus vinhos Malbec?",
+    resposta: "Argentina"
+  },
+  {
+    pergunta: "Qual é a principal variedade de uva utilizada nos vinhos tintos de Bordeaux?",
+    resposta: "Cabernet Sauvignon, Merlot, Cabernet Franc, Petit Verdot e Malbec"
+  },
+  {
+    pergunta: "Qual é o processo de envelhecimento que confere ao Vinho do Porto seu sabor único?",
+    resposta: "Sistema de Solera"
+  },
+  {
+    pergunta: "Qual vinho é conhecido como o 'rei dos vinhos' e o 'vinho dos reis'?",
+    resposta: "Barolo"
+  },
+  {
+    pergunta: "O que significa o termo 'safra' no contexto do vinho?",
+    resposta: "O ano em que as uvas foram colhidas"
+  },
+  {
+    pergunta: "Qual vinho branco é conhecido por suas uvas de casca verde e originou-se na região da Borgonha?",
+    resposta: "Chardonnay"
+  },
+  {
+    pergunta: "Qual é o nome do vinho espumante tradicional da Espanha?",
+    resposta: "Cava"
+  },
+  {
+    pergunta: "Qual vinho é conhecido por seu estilo doce e fortificado e vem do Vale do Douro?",
+    resposta: "Vinho do Porto"
+  },
+  {
+    pergunta: "Qual é a principal variedade de uva utilizada na produção de vinhos Beaujolais?",
+    resposta: "Gamay"
+  },
+  {
+    pergunta: "Qual região vinícola é famosa por seus vinhos Sauvignon Blanc, especialmente da área de Marlborough?",
+    resposta: "Nova Zelândia"
+  },
+  {
+    pergunta: "Qual é o termo para o resíduo de cascas, sementes e caules de uva durante a produção de vinho?",
+    resposta: "Bagaço"
+  },
+  {
+    pergunta: "Qual vinho italiano é conhecido por seus blends 'Super Tuscan'?",
+    resposta: "Tignanello, Sassicaia, Ornellaia, etc."
+  },
+  {
+    pergunta: "Qual é a principal variedade de uva na produção de vinhos tintos de Rioja?",
+    resposta: "Tempranillo"
+  },
+  {
+    pergunta: "Qual região vinícola é renomada por seus vinhos Riesling e está localizada na Alemanha?",
+    resposta: "Mosel"
+  },
+  {
+    pergunta: "Qual é o processo de converter suco de uva em álcool durante a produção de vinho?",
+    resposta: "Fermentação"
+  },
+  {
+    pergunta: "Qual região francesa é conhecida por seus vinhos tintos à base de Syrah?",
+    resposta: "Vale do Rhône Norte"
+  },
+  {
+    pergunta: "Qual é a principal variedade de uva na produção de vinhos Chablis?",
+    resposta: "Chardonnay"
+  },
+  {
+    pergunta: "Qual região vinícola é famosa por seus vinhos Cabernet Sauvignon na Califórnia?",
+    resposta: "Vale de Napa"
+  },
+  {
+    pergunta: "Qual é o nome da garrafa de vinho tradicional com capacidade equivalente a 1,5 litros?",
+    resposta: "Magnum"
+  },
+  {
+    pergunta: "Qual vinho fortificado tradicional da Madeira?",
+    resposta: "Vinho Madeira"
+  },
+  {
+    pergunta: "O que significa o termo para o aroma e buquê de um vinho?",
+    resposta: "Aroma"
+  },
+  {
+    pergunta: "Qual país é conhecido por seus vinhos Shiraz?",
+    resposta: "Austrália"
+  },
+  {
+    pergunta: "Qual é a principal variedade de uva usada na produção de vinhos Malbec?",
+    resposta: "Malbec"
+  },
+  {
+    pergunta: "Qual vinho tinto italiano é conhecido por sua alta acidez e sabores de cereja?",
+    resposta: "Barbera"
+  },
+  {
+    pergunta: "Qual é a principal variedade de uva na produção de vinhos doces Sauternes?",
+    resposta: "Sémillon"
+  },
+  {
+    pergunta: "Qual região vinícola é famosa por seus vinhos Zinfandel, especialmente os Old Vine Zinfandels?",
+    resposta: "Califórnia, EUA"
+  },
+  {
+    pergunta: "Qual é o vinho espumante tradicional da Itália?",
+    resposta: "Prosecco"
+  },
+  {
+    pergunta: "Qual região vinícola é conhecida por seus vinhos Albariño e está localizada na Espanha?",
+    resposta: "Rías Baixas"
+  },
+  {
+    pergunta: "Qual é o termo para o processo de separar o vinho claro de sedimentos durante o envelhecimento?",
+    resposta: "Trasfega"
+  },
+  {
+    pergunta: "Qual vinho tinto é conhecido por sua cor escura, taninos elevados e originou-se no sudoeste da França?",
+    resposta: "Malbec"
+  },
+  {
+    pergunta: "Qual é o nome do vinho espumante produzido na região de Champagne, na França?",
+    resposta: "Champagne"
+  },
+  {
+    pergunta: "Qual região vinícola é famosa por seus vinhos Malbec?",
+    resposta: "Mendoza, Argentina"
+  },
+  {
+    pergunta: "Qual é a principal variedade de uva usada na produção de vinhos tintos de Châteauneuf-du-Pape?",
+    resposta: "Grenache"
+  },
+  {
+    pergunta: "Qual vinho italiano é conhecido por seus blends 'Super Tuscan'?",
+    resposta: "Sassicaia"
+  },
+  {
+    pergunta: "Qual é o nome da garrafa de vinho tradicional com capacidade equivalente a 3 litros?",
+    resposta: "Jeroboão"
+  },
+  {
+    pergunta: "Qual vinho branco é conhecido por suas uvas de casca verde e originou-se no Vale do Loire?",
+    resposta: "Sauvignon Blanc"
+  },
+  {
+    pergunta: "Qual é o vinho fortificado tradicional de Portugal?",
+    resposta: "Vinho do Porto"
+  },
+  {
+    pergunta: "Qual região vinícola é famosa por seus vinhos Syrah, especialmente no Vale Barossa?",
+    resposta: "Austrália do Sul"
+  },
+  {
+    pergunta: "O que significa o termo para os sólidos totais dissolvidos de um vinho, incluindo açúcar, ácidos e minerais?",
+    resposta: "Mosto"
+  },
+  {
+    pergunta: "Qual região francesa é conhecida por seus vinhos tintos à base de Pinot Noir?",
+    resposta: "Borgonha"
+  },
+  {
+    pergunta: "Qual é o processo de adição de açúcar ao vinho antes do engarrafamento para iniciar uma segunda fermentação?",
+    resposta: "Dosagem"
+  },
+  {
+    pergunta: "Qual variedade de uva é usada na produção de vinhos brancos de Sancerre?",
+    resposta: "Sauvignon Blanc"
+  },
+  {
+    pergunta: "Qual é o termo para o cheiro da terra ou solo no vinho?",
+    resposta: "Terroir"
+  },
+];
+
+        function displayRandomQuestion() {
+            const randomIndex = Math.floor(Math.random() * allArtQuestions.length);
+            const currentQuestion = allArtQuestions[randomIndex];
+
+            questionContainer.innerHTML = `<h1>${currentQuestion.question}</h1>`;
+
+            // Show the countdown for 15 seconds
+            let secondsLeft = 15;
+            countdownElement.textContent = `Tempo restante: ${secondsLeft}s`;
+            document.body.appendChild(countdownElement);
+
+            const countdownInterval = setInterval(() => {
+                secondsLeft--;
+
+                if (secondsLeft >= 0) {
+                    countdownElement.textContent = `Tempo restante: ${secondsLeft}s`;
+                } else {
+                    clearInterval(countdownInterval);
+                    countdownElement.textContent = "";
+
+                    // Show the answer for 10 seconds
+                    questionContainer.innerHTML = `<h1>Resposta: ${currentQuestion.answer}</h1>`;
+                    setTimeout(() => {
+                        // Show "Lance o dado outra vez" for 10 seconds
+                        questionContainer.innerHTML = "<h1>Lance o dado outra vez</h1>";
+                        setTimeout(() => {
+                            // Turn the complete page to black after 10 seconds
+                            document.body.style.backgroundColor = "black";
+                        }, 10000);
+                    }, 10000);
+                }
+            }, 1000);
+        }
+
+        displayRandomQuestion(); // Initial call to start the quiz
+    });
+</script>
+
+</body>
+</html>
+
