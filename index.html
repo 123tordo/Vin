@@ -52,6 +52,7 @@
 
         const allVinQuestions = [
             
+            
              {
     pergunta: "Qual é a principal variedade de uva utilizada na produção de Champagne?",
     resposta: "Chardonnay, Pinot Noir e Pinot Meunier"
@@ -242,9 +243,8 @@
   },
 
         ];
-
-        // Shuffle the questions array to ensure randomness
-        const shuffledQuestions = shuffleArray(allVinQuestions.slice());
+// Shuffle the questions array to ensure randomness
+        const shuffledQuestions = shuffleArray(allArtQuestions.slice());
 
         // Variable to keep track of the questions shown
         let questionsShown = 0;
@@ -279,21 +279,11 @@
                         // Show the answer for 10 seconds
                         questionContainer.innerHTML += `<h1 class="answer">Resposta: ${currentQuestion.resposta}</h1>`;
                         setTimeout(() => {
-                            // Show "Lance o dado outra vez e leia o código para novo desafio" for 10 seconds
-                            questionContainer.innerHTML = "<h1>Lance o dado outra vez e leia o código para novo desafio</h1>";
-                            setTimeout(() => {
-                                // Turn the complete page to black after 10 seconds
-                                document.body.style.backgroundColor = "black";
-                                document.body.style.color = "#ecf0f1"; // Set text color to light grey
-                                // Continue to the next question
-                                displayRandomQuestion();
-                            }, 10000);
+                            // Show "Lance o dado outra vez e lê o código para novo desafio" for 10 seconds
+                            questionContainer.innerHTML = "<h1>Lança o dado outra vez e lê o código para novo desafio</h1>";
                         }, 10000);
                     }
                 }, 1000);
-            } else {
-                // All questions have been shown
-                questionContainer.innerHTML = "<h1>Quiz Concluído</h1>";
             }
         }
 
