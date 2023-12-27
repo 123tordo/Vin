@@ -244,7 +244,7 @@
 
         ];
 // Shuffle the questions array to ensure randomness
-        const shuffledQuestions = shuffleArray(allArtQuestions.slice());
+        const shuffledQuestions = shuffleArray(allVinQuestions.slice());
 
         // Variable to keep track of the questions shown
         let questionsShown = 0;
@@ -279,7 +279,7 @@
                         // Show the answer for 10 seconds
                         questionContainer.innerHTML += `<h1 class="answer">Resposta: ${currentQuestion.resposta}</h1>`;
                         setTimeout(() => {
-                            // Show "Lance o dado outra vez e lê o código para novo desafio" for 10 seconds
+                            // Show "Lança o dado outra vez e lê o código para novo desafio" for 10 seconds
                             questionContainer.innerHTML = "<h1>Lança o dado outra vez e lê o código para novo desafio</h1>";
                         }, 10000);
                     }
