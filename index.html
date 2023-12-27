@@ -51,45 +51,73 @@
         document.body.appendChild(questionContainer);
 
         const allArtQuestions = [
-             {
+            {
                 pergunta: "Qual é a principal variedade de uva utilizada na produção de Champagne?",
                 resposta: "Chardonnay, Pinot Noir e Pinot Meunier"
             },
-            // ... (other questions)
+            {
+                pergunta: "Qual região vinícola é conhecida por produzir Chianti?",
+                resposta: "Toscana, Itália"
+            },
+            // ... (add all your questions here)
+            {
+                pergunta: "Qual é o termo para o cheiro da terra ou solo no vinho?",
+                resposta: "Terroir"
+            }
         ];
 
+        // Shuffle the questions array to ensure randomness
+        const shuffledQuestions = shuffleArray(allArtQuestions.slice());
+
+        // Variable to keep track of the questions shown
+        let questionsShown = 0;
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
         function displayRandomQuestion() {
-            const randomIndex = Math.floor(Math.random() * allArtQuestions.length);
-            const currentQuestion = allArtQuestions[randomIndex];
+            if (questionsShown < shuffledQuestions.length) {
+                const currentQuestion = shuffledQuestions[questionsShown++];
 
-            questionContainer.innerHTML = `<h1>${currentQuestion.pergunta}</h1>`;
-            questionContainer.appendChild(countdownElement);
+                questionContainer.innerHTML = `<h1>${currentQuestion.pergunta}</h1>`;
+                questionContainer.appendChild(countdownElement);
 
-            // Show the countdown for 15 seconds
-            let secondsLeft = 15;
-            countdownElement.textContent = `Tempo restante: ${secondsLeft}s`;
+                // Show the countdown for 15 seconds
+                let secondsLeft = 15;
+                countdownElement.textContent = `Tempo restante: ${secondsLeft}s`;
 
-            const countdownInterval = setInterval(() => {
-                secondsLeft--;
+                const countdownInterval = setInterval(() => {
+                    secondsLeft--;
 
-                if (secondsLeft >= 0) {
-                    countdownElement.textContent = `Tempo restante: ${secondsLeft}s`;
-                } else {
-                    clearInterval(countdownInterval);
+                    if (secondsLeft >= 0) {
+                        countdownElement.textContent = `Tempo restante: ${secondsLeft}s`;
+                    } else {
+                        clearInterval(countdownInterval);
 
-                    // Show the answer for 10 seconds
-                    questionContainer.innerHTML += `<h1 class="answer">Resposta: ${currentQuestion.resposta}</h1>`;
-                    setTimeout(() => {
-                        // Show "Lance o dado outra vez" for 10 seconds
-                        questionContainer.innerHTML = "<h1>Lance o dado outra vez</h1>";
+                        // Show the answer for 10 seconds
+                        questionContainer.innerHTML += `<h1 class="answer">Resposta: ${currentQuestion.resposta}</h1>`;
                         setTimeout(() => {
-                            // Turn the complete page to black after 10 seconds
-                            document.body.style.backgroundColor = "black";
-                            document.body.style.color = "#ecf0f1"; // Set text color to light grey
+                            // Show "Lance o dado outra vez" for 10 seconds
+                            questionContainer.innerHTML = "<h1>Lance o dado outra vez</h1>";
+                            setTimeout(() => {
+                                // Turn the complete page to black after 10 seconds
+                                document.body.style.backgroundColor = "black";
+                                document.body.style.color = "#ecf0f1"; // Set text color to light grey
+                                // Continue to the next question
+                                displayRandomQuestion();
+                            }, 10000);
                         }, 10000);
-                    }, 10000);
-                }
-            }, 1000);
+                    }
+                }, 1000);
+            } else {
+                // All questions have been shown
+                questionContainer.innerHTML = "<h1>Quiz Concluído</h1>";
+            }
         }
 
         displayRandomQuestion(); // Initial call to start the quiz
